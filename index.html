@@ -4,13 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Prueba</title>
 </head>
 <body>
-    <h1>Perros Aleatorios</h1>
-    <button id="bAleatorio">Prueba</button>
+    <h1>API de Perros</h1>
+    <section class="perros-random">
+        <h2>Perros Aleatorios</h2>
+        <div>
+            <div>
+                <img src="" alt="" id="perro1" loading="lazy" width="200px" height="200px">
+                <button>Agregar a favoritos</button>
+            </div>
+            <div>
+                <img src="" alt="" id="perro2" loading="lazy" width="200px" height="200px">
+                <button>Agregar a favoritos</button>
+            </div>
+            <div>
+                <img src="" alt="" id="perro3" loading="lazy" width="200px" height="200px">
+                <button>Agregar a favoritos</button>
+            </div>
+        </div>
+        <br>
+        <button id="random-button">Recargar</button>
+    </section>
     <br>
-    <img id="imgPerro">
+    <section class="perros-fav">
+        <h2>Perros favoritos</h2>
+        <!-- Contenido hecho con JS -->
+    </section>
 </body>
 <script src="./main.js"></script>
 </html>
