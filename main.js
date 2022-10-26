@@ -7,14 +7,11 @@ let perro3 = $('#perro3')
 let btnFav1 = Array.from(document.querySelectorAll('.perro-random1'))
 let btnFav2 = Array.from(document.querySelectorAll('.perro-random2'))
 let btnFav3 = Array.from(document.querySelectorAll('.perro-random3'))
-let perrosFav = $('.perros-fav')
+let perrosFav = $('.perros-fav-images')
 
 const API_URL_BASE = 'https://api.thedogapi.com/v1'
 const API_KEY = 'api_key=live_JUdVCLuZgYC8IHc2WbwAA25MhERsutpTFGK5MCfP23Zk9xUNwf8Dk88vQDEI6DpI'
 
-
-
-//usando fetch 
 
 function perrosAleatorios() {
     fetch(`${API_URL_BASE}/images/search?limit=3`)
@@ -31,6 +28,7 @@ function perrosAleatorios() {
         })
 }
 
+
 async function agregarFavorito(id) {
     let info = await fetch(`${API_URL_BASE}/favourites?${API_KEY}`,
     {
@@ -45,33 +43,46 @@ async function agregarFavorito(id) {
     renderFavoritos()
 }
 
-// }
-
 
 function renderFavoritos() {
     perrosFav.innerHTML = ""
-    fetch(`${API_URL_BASE}/favourites?${API_KEY}&limit=2&page=5`)
+    let h2 = document.h2
+    fetch(`${API_URL_BASE}/favourites?${API_KEY}`)
         .then((res)=>res.json())
         .then((data)=>{
             let arrayPerrosFav = []
+
+
             for (const iterator of data) {
-                if (!iterator.image.url) {
-                    console.log('')
-                }else{
-                    let img = document.createElement('img')
-                    img.src = (iterator.image.url)
-                    img.width = 200
-                    arrayPerrosFav.push(img)
-                }
+
+                let div = document.createElement('div')
+                let btn = document.createElement('button')
+                let img = document.createElement('img')
+                btn.innerText='sacar de favoritos'
+                btn.onclick = ()=>eliminarFavorito(iterator.id)
+                img.src = (iterator.image.url)
+                img.width = 200
+                div.append(img, btn)
+
+                arrayPerrosFav.push(div)
 
             }
+            
             perrosFav.append(...arrayPerrosFav)
+        }
+    )
+}
 
-        })
+async function eliminarFavorito(id){
+    let a = await fetch(`${API_URL_BASE}/favourites/${id}?${API_KEY}`, {
+        'method': 'DELETE'
+    })
+
+    renderFavoritos()
+
 }
     
-    
-    
+
 
 botonAleatorio.addEventListener('click', perrosAleatorios)
 btnFav1[1].addEventListener('click', ()=>{
@@ -86,21 +97,4 @@ btnFav3[1].addEventListener('click', ()=>{
 
 
 perrosAleatorios()
-
 renderFavoritos()
-
-// async function ke() {
-//     const res = await fetch(`${API_URL_BASE}/images/search?limit=3`)
-//     console.log(res)
-//     const data = await res.json()
-//     console.log(data)
-
-// }
-// ke()
-// agregarFavoritos()
-
-const API_URL = ''
-
-fetch(API_URL)
-    .then((res)=>res.json())
-    .then((data)=>console.log(data))
