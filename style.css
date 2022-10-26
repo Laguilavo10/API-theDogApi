@@ -14,3 +14,17 @@
     display: flex;
     justify-content: center;
 }
+
+.perros-fav-images{
+    display: flex;
+    margin: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.perros-fav-images > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

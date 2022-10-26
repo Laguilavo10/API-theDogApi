@@ -62,12 +62,13 @@ function renderFavoritos() {
                 btn.onclick = ()=>eliminarFavorito(iterator.id)
                 img.src = (iterator.image.url)
                 img.width = 200
+                img.height = 200
                 div.append(img, btn)
 
                 arrayPerrosFav.push(div)
 
             }
-            
+
             perrosFav.append(...arrayPerrosFav)
         }
     )
